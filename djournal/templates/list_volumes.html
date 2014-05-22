@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<ul id="volumes-list">
+    {% for volume in volume_list %}
+    <li><a href="{% url 'index' volume.number %}">
+        {{ volume }}
+    </a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
