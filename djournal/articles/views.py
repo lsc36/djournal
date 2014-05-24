@@ -22,7 +22,7 @@ def index(request, volume_number):
     volume = get_object_or_404(Volume, published=True, number=volume_number)
     category_list = Category.objects.all().order_by('order')
     context = {
-        'site_name': settings.SITE_NAME,
+        'settings': settings,
         'volume': volume,
         'category_list': category_list,
         }
@@ -39,7 +39,7 @@ def view_category(request, volume_number, category_name):
         article_list = Article.objects.filter(volume=volume, category=category)
     article_list = article_list.order_by('category', 'title')
     context = {
-        'site_name': settings.SITE_NAME,
+        'settings': settings,
         'volume': volume,
         'category': category,
         'article_list': article_list,
@@ -51,7 +51,7 @@ def view_article(request, volume_number, article_id):
     volume = get_object_or_404(Volume, published=True, number=volume_number)
     article = get_object_or_404(Article, volume=volume, id=article_id)
     context = {
-        'site_name': settings.SITE_NAME,
+        'settings': settings,
         'volume': volume,
         'article': article,
         }
@@ -61,7 +61,7 @@ def view_article(request, volume_number, article_id):
 def list_volumes(request):
     volume_list = get_list_or_404(Volume, published=True)
     context = {
-        'site_name': settings.SITE_NAME,
+        'settings': settings,
         'volume_list': volume_list,
         }
     return render(request, 'list_volumes.html', context)

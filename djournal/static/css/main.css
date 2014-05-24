@@ -101,12 +101,44 @@ textarea {
 
 
 
+/* common */
+
+body {
+    color: #333;
+    background-color: #e0e0e0;
+}
+
+a { color: #72dcff; }
+
+.wrap {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 5px;
+}
 
 
+/* header */
+
+#head { background-color: #a6e9ff; }
+
+#head a { display: block; }
+
+#site-name {
+    color: #2889aa;
+    font-size: xx-large;
+    text-decoration: none;
+}
+
+#current-volume {
+    color: #2889aa;
+}
 
 
+/* content */
 
-
+#content {
+    background-color: #fff;
+}
 
 
 
