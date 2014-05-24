@@ -1,8 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<h3><a href="{% url 'view_category' volume.number article.category %}">
-    {{ article.category }}
-</a></h3>
 <h1>{{ article.title }}</h1>
 {{ article.content|safe }}
 {% endblock %}

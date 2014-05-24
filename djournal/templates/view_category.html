@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<h3>{{ category }}</h3>
 <ul id="article-list">
     {% for article in article_list %}
     <li><a href="{% url 'view_article' volume.number article.id %}">

@@ -28,9 +28,39 @@
             <a id="current-volume" href="{% url 'list_volumes' %}">{{ volume }}</a>
             {% endif %}
         </div>
-        <div id="content" class="wrap">
-            {% block content %}
-            {% endblock %}
+        <div id="body" class="wrap">
+            {% if category_list %}
+            <div id="category-list">
+                <ul>
+                    {% if 'all' == category %}
+                    <li class="active">
+                    {% else %}
+                    <li>
+                    {% endif %}
+                        <a href="{% url 'view_category' volume.number 'all' %}">
+                            all
+                        </a>
+                    </li>
+                    {% for cat in category_list %}
+                    {% if cat == category %}
+                    <li class="active">
+                    {% else %}
+                    <li>
+                    {% endif %}
+                        <a href="{% url 'view_category' volume.number cat.name %}">
+                            {{ cat.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="content" class="with-menu">
+            {% else %}
+            <div id="content">
+            {% endif %}
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

@@ -66,7 +66,10 @@ def view_category(request, volume_number, category_name):
 def view_article(request, volume_number, article_id):
     volume = get_object_or_404(Volume, published=True, number=volume_number)
     article = get_object_or_404(Article, volume=volume, id=article_id)
-    context = _build_context_with_volume(volume, article=article)
+    context = _build_context_with_volume(volume,
+        article=article,
+        category=article.category,
+        )
     return render(request, 'view_article.html', context)
 
 

@@ -1,13 +1,3 @@
 {% extends "base.html" %}
 {% block content %}
-<ul id="category-list">
-    <li><a href="{% url 'view_category' volume.number 'all' %}">
-        all
-    </a></li>
-    {% for category in category_list %}
-    <li><a href="{% url 'view_category' volume.number category.name %}">
-        {{ category }}
-    </a></li>
-    {% endfor %}
-</ul>
 {% endblock %}
