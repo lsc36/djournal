@@ -7,6 +7,29 @@ from articles.models import *
 from django.conf import settings
 
 
+def _get_category_list_of_volume(volume):
+    article_list = Article.objects.filter(volume=volume).order_by('category')
+    visited = set()
+    return [article.category for article in article_list \
+        if article.category not in visited \
+        and not visited.add(article.category)]
+
+
+def _build_context(**kwargs):
+    context = {
+        'settings': settings,
+        }
+    for key in kwargs.keys():
+        context[key] = kwargs[key]
+    return context
+
+
+def _build_context_with_volume(volume, **kwargs):
+    kwargs['volume'] = volume
+    kwargs['category_list'] = _get_category_list_of_volume(volume)
+    return _build_context(**kwargs)
+
+
 def index(request, volume_number):
     if not volume_number:
         try:
@@ -20,12 +43,8 @@ def index(request, volume_number):
         except:
             raise Http404
     volume = get_object_or_404(Volume, published=True, number=volume_number)
-    category_list = Category.objects.all().order_by('order')
-    context = {
-        'settings': settings,
-        'volume': volume,
-        'category_list': category_list,
-        }
+    category_list = _get_category_list_of_volume(volume)
+    context = _build_context_with_volume(volume)
     return render(request, 'index.html', context)
 
 
@@ -38,30 +57,23 @@ def view_category(request, volume_number, category_name):
         category = get_object_or_404(Category, name=category_name)
         article_list = Article.objects.filter(volume=volume, category=category)
     article_list = article_list.order_by('category', 'title')
-    context = {
-        'settings': settings,
-        'volume': volume,
-        'category': category,
-        'article_list': article_list,
-        }
+    category_list = _get_category_list_of_volume(volume)
+    context = _build_context_with_volume(volume,
+        category=category,
+        article_list=article_list,
+        )
     return render(request, 'view_category.html', context)
 
 
 def view_article(request, volume_number, article_id):
     volume = get_object_or_404(Volume, published=True, number=volume_number)
     article = get_object_or_404(Article, volume=volume, id=article_id)
-    context = {
-        'settings': settings,
-        'volume': volume,
-        'article': article,
-        }
+    category_list = _get_category_list_of_volume(volume)
+    context = _build_context_with_volume(volume, article=article)
     return render(request, 'view_article.html', context)
 
 
 def list_volumes(request):
     volume_list = get_list_or_404(Volume, published=True)
-    context = {
-        'settings': settings,
-        'volume_list': volume_list,
-        }
+    context = _build_context(volume_list=volume_list)
     return render(request, 'list_volumes.html', context)
