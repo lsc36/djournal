@@ -2,7 +2,7 @@
 {% block content %}
 <ul id="article-list">
     {% for article in article_list %}
-    <li><a href="{% url 'view_article' volume.number article.id %}">
+    <li><a href="{% url 'view_article' volume.number article.id article.title %}">
         {{ article.title }}
     </a></li>
     {% endfor %}
