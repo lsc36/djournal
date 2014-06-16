@@ -51,7 +51,9 @@ def view_category(request, volume_number, category_name):
     volume = get_object_or_404(Volume, published=True, number=volume_number)
     category = get_object_or_404(Category, name=category_name)
     article_list = Article.objects.filter(volume=volume, category=category) \
-		.order_by('category', 'title')
+        .order_by('category', 'title')
+    if len(article_list) == 1:
+        return redirect(article_list[0])
     context = _build_context_with_volume(volume,
         category=category,
         article_list=article_list,

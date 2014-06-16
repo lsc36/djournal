@@ -48,3 +48,7 @@ class Article(models.Model):
 
     def __str__(self):
         return '[%s] %s' % (self.category, self.title)
+
+    def get_absolute_url(self):
+        return reverse('articles.views.view_article',
+            args=[self.volume.number, self.id, self.title])
