@@ -32,15 +32,6 @@
             {% if category_list %}
             <div id="category-list">
                 <ul>
-                    {% if 'all' == category %}
-                    <li class="active">
-                    {% else %}
-                    <li>
-                    {% endif %}
-                        <a href="{% url 'view_category' volume.number 'all' %}">
-                            all
-                        </a>
-                    </li>
                     {% for cat in category_list %}
                     {% if cat == category %}
                     <li class="active">

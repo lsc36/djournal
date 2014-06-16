@@ -49,13 +49,9 @@ def index(request, volume_number):
 
 def view_category(request, volume_number, category_name):
     volume = get_object_or_404(Volume, published=True, number=volume_number)
-    if category_name == 'all':
-        category = 'all'
-        article_list = Article.objects.filter(volume=volume)
-    else:
-        category = get_object_or_404(Category, name=category_name)
-        article_list = Article.objects.filter(volume=volume, category=category)
-    article_list = article_list.order_by('category', 'title')
+    category = get_object_or_404(Category, name=category_name)
+    article_list = Article.objects.filter(volume=volume, category=category) \
+		.order_by('category', 'title')
     context = _build_context_with_volume(volume,
         category=category,
         article_list=article_list,
