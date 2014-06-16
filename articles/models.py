@@ -38,6 +38,7 @@ class Article(models.Model):
     volume = models.ForeignKey(Volume, verbose_name='期數')
     category = models.ForeignKey(Category, verbose_name='分類')
     title = models.CharField('標題', max_length=100)
+    author = models.CharField('作者', max_length=100)
     content = models.TextField('內文')
     last_mod = models.DateTimeField('最後修改時間', auto_now=True)
 
