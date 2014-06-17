@@ -113,8 +113,6 @@ a { color: #2889aa; }
 .wrap {
     width: 1000px;
     margin: 0 auto;
-    padding-left: 5px;
-    padding-right: 5px;
 }
 
 
@@ -153,20 +151,20 @@ a { color: #2889aa; }
     min-height: 200px;
 }
 
-#content.with-menu { margin-left: 205px; }
+#content.with-menu {
+    width: 745px;
+    float: left;
+}
 
 
 /* category list */
 
 #category-list {
     display: block;
-    position: absolute;
-    top: 15px;
-    left: 0;
     width: 200px;
     list-style: none;
-    margin: 0;
-    padding: 0;
+    padding: 15px 5px 15px 0;
+	float: left;
 }
 
 #category-list ul {
