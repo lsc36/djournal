@@ -7,7 +7,7 @@ from django.conf import settings
 class Volume(models.Model):
 
     number = models.IntegerField('期數')
-    published = models.BooleanField('已出版')
+    published = models.BooleanField('已出版', default=False)
 
     class Meta:
         verbose_name = verbose_name_plural = '期數'
