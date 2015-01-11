@@ -39,6 +39,7 @@ class Article(models.Model):
     category = models.ForeignKey(Category, verbose_name='分類')
     title = models.CharField('標題', max_length=100)
     author = models.CharField('作者', max_length=100, blank=True)
+    cover_image = models.ImageField('封面圖片', blank=True)
     content = models.TextField('內文')
     last_mod = models.DateTimeField('最後修改時間', auto_now=True)
 
